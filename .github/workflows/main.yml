@@ -1,0 +1,57 @@
+name: Compilar Vamos Android
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Preparar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Descomprimir proyecto
+        run: |
+          unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d proyecto
+
+      - name: Completar herramientas Android
+        run: |
+          flutter create --platforms=android --project-name plantilla /tmp/plantilla
+          cp -r /tmp/plantilla/android/gradle proyecto/vamos_app/android/
+          cp /tmp/plantilla/android/gradlew proyecto/vamos_app/android/
+          cp /tmp/plantilla/android/gradlew.bat proyecto/vamos_app/android/
+          cp /tmp/plantilla/android/settings.gradle.kts proyecto/vamos_app/android/
+          cp /tmp/plantilla/android/local.properties proyecto/vamos_app/android/
+          chmod +x proyecto/vamos_app/android/gradlew
+
+      - name: Instalar dependencias
+        working-directory: proyecto/vamos_app
+        run: flutter pub get
+
+      - name: Compilar APK de prueba
+        working-directory: proyecto/vamos_app
+        run: flutter build apk --debug
+
+      - name: Guardar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vamos-Android-Prueba
+          path: proyecto/vamos_app/build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+          retention-days: 7
