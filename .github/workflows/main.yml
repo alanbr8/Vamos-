@@ -1,3 +1,34 @@
+name: Compilar Vamos Android
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Preparar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Descomprimir proyecto
+        run: unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d proyecto
+
       - name: Completar herramientas Android
         run: |
           flutter create --platforms=android --project-name plantilla /tmp/plantilla
@@ -11,7 +42,7 @@
           cp /tmp/plantilla/android/app/build.gradle.kts proyecto/vamos_app/android/app/
           sed -i 's/com\.example\.plantilla/com.vamoscarpool.app/g' proyecto/vamos_app/android/app/build.gradle.kts
           chmod +x proyecto/vamos_app/android/gradlew
-          
+
       - name: Instalar dependencias
         working-directory: proyecto/vamos_app
         run: flutter pub get
