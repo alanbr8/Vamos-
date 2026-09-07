@@ -49,7 +49,7 @@ jobs:
 
       - name: Compilar APK de prueba
         working-directory: proyecto/vamos_app
-        run: flutter build apk --debug
+        run: flutter build apk --debug --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
 
       - name: Guardar APK
         uses: actions/upload-artifact@v4
