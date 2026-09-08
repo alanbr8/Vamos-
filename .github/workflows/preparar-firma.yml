@@ -1,0 +1,30 @@
+name: Preparar firma Vamos (una sola vez)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  firma:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Crear archivo para guardar como secreto
+        env:
+          EXISTING_KEY: ${{ secrets.VAMOS_ANDROID_KEYSTORE }}
+        run: |
+          if [ -n "$EXISTING_KEY" ]; then
+            echo "La firma ya existe. No generes otra: cambiarla impide actualizar la app instalada."
+            exit 1
+          fi
+          keytool -genkeypair -keystore "$RUNNER_TEMP/vamos.keystore" -storepass android -keypass android -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Vamos Internal Test"
+          base64 -w 0 "$RUNNER_TEMP/vamos.keystore" > "$RUNNER_TEMP/VAMOS_ANDROID_KEYSTORE.txt"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Firma-privada-guardar-como-secreto
+          path: ${{ runner.temp }}/VAMOS_ANDROID_KEYSTORE.txt
+          retention-days: 1
+          if-no-files-found: error
