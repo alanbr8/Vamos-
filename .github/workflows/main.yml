@@ -1,35 +1,54 @@
 name: Compilar Vamos Android
-
 on:
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
+  verificar-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: vamos_test
+          POSTGRES_USER: vamos_test
+          POSTGRES_PASSWORD: solo-ci-efimero
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U vamos_test -d vamos_test"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d proyecto
+      - run: npm ci --include=dev
+        working-directory: proyecto/backend
+      - run: npm run build && npm test -- --runInBand
+        working-directory: proyecto/backend
+      - run: node test/integration.cjs
+        working-directory: proyecto/backend
+        env:
+          TEST_DATABASE_URL: postgresql://vamos_test:solo-ci-efimero@127.0.0.1:5432/vamos_test
   android:
+    needs: verificar-api
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
     steps:
-      - name: Descargar repositorio
-        uses: actions/checkout@v4
-
-      - name: Preparar Java
-        uses: actions/setup-java@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "17"
-
-      - name: Preparar Flutter
-        uses: subosito/flutter-action@v2
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.47.2'
           channel: stable
-
-      - name: Descomprimir proyecto
-        run: unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d proyecto
-
-      - name: Completar herramientas Android
+      - run: unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d proyecto
+      - name: Preparar Android
         run: |
           flutter create --platforms=android --project-name plantilla /tmp/plantilla
           cp -r /tmp/plantilla/android/gradle proyecto/vamos_app/android/
@@ -42,17 +61,28 @@ jobs:
           cp /tmp/plantilla/android/app/build.gradle.kts proyecto/vamos_app/android/app/
           sed -i 's/com\.example\.plantilla/com.vamoscarpool.app/g' proyecto/vamos_app/android/app/build.gradle.kts
           chmod +x proyecto/vamos_app/android/gradlew
-
-      - name: Instalar dependencias
+      - name: Restaurar firma estable de pruebas
+        env:
+          VAMOS_ANDROID_KEYSTORE: ${{ secrets.VAMOS_ANDROID_KEYSTORE }}
+        run: |
+          if [ -z "$VAMOS_ANDROID_KEYSTORE" ]; then
+            echo "Falta el secreto VAMOS_ANDROID_KEYSTORE. Sigue delivery/LEEME.md."
+            exit 1
+          fi
+          mkdir -p "$HOME/.android"
+          printf '%s' "$VAMOS_ANDROID_KEYSTORE" | base64 --decode > "$HOME/.android/debug.keystore"
+          chmod 600 "$HOME/.android/debug.keystore"
+          keytool -list -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey
+      - run: flutter pub get
         working-directory: proyecto/vamos_app
-        run: flutter pub get
-
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        working-directory: proyecto/vamos_app
+      - run: flutter test
+        working-directory: proyecto/vamos_app
       - name: Compilar APK de prueba
+        run: flutter build apk --debug --build-number=$((1000 + GITHUB_RUN_NUMBER)) --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
         working-directory: proyecto/vamos_app
-        run: flutter build apk --debug --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
-
-      - name: Guardar APK
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: Vamos-Android-Prueba
           path: proyecto/vamos_app/build/app/outputs/flutter-apk/app-debug.apk
