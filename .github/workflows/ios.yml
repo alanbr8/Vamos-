@@ -1,0 +1,50 @@
+name: Comprobar Vamos iOS
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ios:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.2'
+          channel: stable
+      - name: Revisar herramientas
+        run: |
+          flutter --version
+          xcodebuild -version
+          pod --version
+      - name: Extraer proyecto
+        run: unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d "$RUNNER_TEMP/vamos-ios"
+      - name: Generar plataforma iOS
+        run: |
+          flutter config --no-enable-swift-package-manager
+          flutter create --platforms=ios --org com.vamoscarpool --project-name vamos_app --no-pub "$RUNNER_TEMP/vamos-ios-template"
+          python3 "$RUNNER_TEMP/vamos-ios/vamos_app/tool/preparar_ios.py" "$RUNNER_TEMP/vamos-ios-template"
+      - name: Resolver dependencias
+        working-directory: ${{ runner.temp }}/vamos-ios/vamos_app
+        run: flutter pub get
+      - name: Analizar Flutter
+        working-directory: ${{ runner.temp }}/vamos-ios/vamos_app
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - name: Pruebas Flutter
+        working-directory: ${{ runner.temp }}/vamos-ios/vamos_app
+        run: flutter test
+      - name: Compilar iOS sin firma
+        working-directory: ${{ runner.temp }}/vamos-ios/vamos_app
+        run: flutter build ios --release --no-codesign --build-number="$GITHUB_RUN_NUMBER" --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
+      - name: Guardar proyecto iOS y dependencias resueltas
+        working-directory: ${{ runner.temp }}/vamos-ios/vamos_app
+        run: |
+          zip -qr "$RUNNER_TEMP/Vamos-iOS-Comprobacion.zip" ios pubspec.lock -x 'ios/Pods/*' 'ios/.symlinks/*' 'ios/Flutter/ephemeral/*'
+          echo 'Compilación iOS sin firma correcta. No es una IPA instalable ni una versión para TestFlight.' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Vamos-iOS-Comprobacion
+          path: ${{ runner.temp }}/Vamos-iOS-Comprobacion.zip
+          if-no-files-found: error
+          retention-days: 7
