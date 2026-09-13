@@ -61,6 +61,11 @@ jobs:
           cp /tmp/plantilla/android/app/build.gradle.kts proyecto/vamos_app/android/app/
           sed -i 's/com\.example\.plantilla/com.vamoscarpool.app/g' proyecto/vamos_app/android/app/build.gradle.kts
           chmod +x proyecto/vamos_app/android/gradlew
+      - name: Configurar Firebase Android
+        run: python3 tool/configurar_push_android.py
+        working-directory: proyecto/vamos_app
+        env:
+          VAMOS_FIREBASE_ANDROID_JSON: ${{ secrets.VAMOS_FIREBASE_ANDROID_JSON }}
       - name: Restaurar firma estable de pruebas
         env:
           VAMOS_ANDROID_KEYSTORE: ${{ secrets.VAMOS_ANDROID_KEYSTORE }}
