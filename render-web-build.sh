@@ -3,10 +3,10 @@ set -euo pipefail
 
 project_dir="$PWD/proyecto"
 flutter_dir="$PWD/.flutter-sdk"
-source_zip="$PWD/Vamos_MVP_Fullstack_1.9.1.zip"
+source_zip="$PWD/Vamos_MVP_Fullstack_1.9.2.zip"
 
 if [[ ! -f "$source_zip" ]]; then
-  echo "No se encontró Vamos_MVP_Fullstack_1.9.1.zip en la raíz del repositorio."
+  echo "No se encontró Vamos_MVP_Fullstack_1.9.2.zip en la raíz del repositorio."
   exit 1
 fi
 
