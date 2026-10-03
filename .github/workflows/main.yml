@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d proyecto
+      - run: unzip -q Vamos_MVP_Fullstack_1.9.6.zip -d proyecto
       - run: npm ci --include=dev
         working-directory: proyecto/backend
       - run: npm run build && npm test -- --runInBand
@@ -47,7 +47,7 @@ jobs:
         with:
           flutter-version: '3.47.2'
           channel: stable
-      - run: unzip -q Vamos_MVP_Fullstack_1.8.0.zip -d proyecto
+      - run: unzip -q Vamos_MVP_Fullstack_1.9.6.zip -d proyecto
       - name: Preparar Android
         run: |
           flutter create --platforms=android --project-name plantilla /tmp/plantilla
