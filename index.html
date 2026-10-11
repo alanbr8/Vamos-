@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vamos!! - Carpool en Bolivia</title>
+  <!-- CDN de Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .bg-brand-dark { background-color: #111820; } /* Fondo oscuro identitario (image_2.png) */
+    .text-brand-yellow { color: #f5b82e; }       /* Amarillo principal */
+    .bg-brand-yellow { background-color: #f5b82e; }
+    .bg-brand-green { background-color: #0d5f3a; } /* Verde principal (image_0.png) */
+    .border-brand-green { border-color: #0d5f3a; }
+  </style>
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased selection:bg-yellow-400 selection:text-black">
+
+  <!-- 1. BARRA DE NAVEGACIÓN -->
+  <header class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center border-b border-gray-800/80">
+    <div class="flex items-center gap-3">
+      <!-- Logo Principal (image_0.png) -->
+      <img src="image_0.png" alt="Logo Vamos!!" class="h-14 w-auto object-contain rounded-lg">
+      <div class="flex flex-col">
+        <span class="text-2xl font-bold tracking-tight">Vamos<span class="text-brand-yellow">!!</span></span>
+        <span class="text-[9px] uppercase tracking-wider text-gray-400 -mt-1 font-semibold">La unión es la fuerza</span>
+      </div>
+    </div>
+    
+    <!-- Enlaces y Acción -->
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+      <a href="#como-funciona" class="hover:text-white transition">Cómo funciona</a>
+      <a href="#conductores" class="hover:text-white transition">Conductores</a>
+      <a href="#empresas" class="hover:text-white transition">Empresas</a>
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href="#unirme" class="px-5 py-2.5 rounded-full bg-brand-yellow text-gray-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-yellow-500/10">
+        Unirse al Piloto
+      </a>
+    </div>
+  </header>
+
+  <!-- 2. HERO SECTION -->
+  <section class="max-w-6xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="inline-block py-1 px-3 mb-4 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide uppercase">
+        Carpool en Bolivia 🇧🇴
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6">
+        Tu ruta de <span class="text-brand-yellow">siempre</span>, acompañado.
+      </h1>
+      <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+        Comparte auto, ahorra en cada viaje y llega con gente de confianza que va para el mismo lado. Viaja seguro y divide gastos en Santa Cruz de la Sierra.
+      </p>
+      
+      <!-- Call to Action -->
+      <div id="unirme" class="flex flex-col sm:flex-row gap-4">
+        <a href="mailto:contacto@vamos.bo?subject=Quiero unirme al piloto de Vamos!!" class="px-8 py-4 rounded-full bg-brand-yellow text-gray-950 font-extrabold text-center hover:bg-yellow-400 hover:shadow-lg transition duration-200">
+          Súmate a la lista de espera
+        </a>
+        <a href="#como-funciona" class="px-8 py-4 rounded-full border border-gray-700 text-white font-semibold text-center hover:bg-gray-800/60 transition duration-200">
+          Descubrir más
+        </a>
+      </div>
+      <p class="text-xs text-gray-500 mt-4">Muy pronto disponible en Play Store y App Store • Pruebas piloto abiertas</p>
+    </div>
+
+    <!-- Imagen de Interfaz Móvil (image_2.png) -->
+    <div class="relative flex justify-center">
+      <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-800 bg-gray-950/50 p-3 max-w-[360px] md:max-w-md w-full">
+        <img src="image_2.png" alt="App Vamos!! en Santa Cruz" class="w-full h-auto rounded-[2rem] object-cover shadow-inner">
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LOS TRES PILARES (image_1.png / image_5.png / image_6.png) -->
+  <section id="como-funciona" class="bg-gray-950/40 border-y border-gray-800/50 py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">La manera más inteligente de moverte</h2>
+        <p class="text-gray-400 text-sm">Nuestra plataforma se sostiene en la confianza de la comunidad y la ayuda mutua en tus trayectos de siempre.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Pilar 1 -->
+        <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center hover:border-emerald-500/30 transition duration-300">
+          <div class="w-20 h-20 mx-auto mb-4 bg-emerald-950/50 border border-emerald-500/20 rounded-full flex items-center justify-center">
+            <!-- Icono inspirado en "Comparte el viaje" de image_1.png -->
+            <span class="text-4xl">👥</span>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Comparte el viaje</h3>
+          <p class="text-sm text-gray-300">Conecta con tus propios compañeros de trabajo o universidad que van a tu mismo destino.</p>
+        </div>
+        <!-- Pilar 2 -->
+        <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center hover:border-yellow-500/30 transition duration-300">
+          <div class="w-20 h-20 mx-auto mb-4 bg-yellow-950/40 border border-yellow-500/20 rounded-full flex items-center justify-center">
+            <!-- Icono inspirado en "Comparte los gastos" de image_1.png -->
+            <span class="text-4xl">🪙</span>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Comparte los gastos</h3>
+          <p class="text-sm text-gray-300">Frente al costo del combustible, dividan los gastos de forma justa y directa en cada viaje.</p>
+        </div>
+        <!-- Pilar 3 -->
+        <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center hover:border-emerald-500/30 transition duration-300">
+          <div class="w-20 h-20 mx-auto mb-4 bg-emerald-950/50 border border-emerald-500/20 rounded-full flex items-center justify-center">
+            <!-- Icono inspirado en "Encuentra compañía" de image_1.png -->
+            <span class="text-4xl">📍</span>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Encuentra compañía</h3>
+          <p class="text-sm text-gray-300">Evita viajar solo, haz amigos en el trayecto y genera comunidad con gente verificada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONDUCTORES: QUE EL GASTO NO VIAJE SOLO (image_4.png) -->
+  <section id="conductores" class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center border-b border-gray-800/80">
+    <div class="order-2 md:order-1 flex justify-center">
+      <!-- Arte original adaptado (image_4.png) -->
+      <img src="image_4.png" alt="Que el gasto no viaje solo" class="w-full max-w-md rounded-3xl shadow-xl border border-gray-800 hover:scale-[1.02] transition-transform duration-300">
+    </div>
+    <div class="order-1 md:order-2">
+      <span class="inline-block py-1 px-3 mb-4 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase">
+        Para Conductores
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6 leading-tight">
+        Que el gasto <span class="text-brand-yellow">no viaje solo.</span>
+      </h2>
+      <p class="text-gray-300 text-lg leading-relaxed mb-6">
+        ¿Tienes espacio en el auto? En lugar de asumir solo el peso del combustible diario, comparte los asientos libres con compañeros verificados que van por tu misma ruta.
+      </p>
+      <div class="space-y-4 text-gray-300">
+        <div class="flex items-center gap-3">
+          <span class="text-emerald-500 text-xl">✓</span>
+          <span><strong>Ahorro garantizado:</strong> Recupera una gran parte de tus gastos cotidianos de movilidad.</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-emerald-500 text-xl">✓</span>
+          <span><strong>Tú tienes el control:</strong> Define tus horarios, puntos de encuentro y cuántos llevar en ruta.</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-emerald-500 text-xl">✓</span>
+          <span><strong>Comunidad de confianza:</strong> Validamos a todos los usuarios antes de su primer viaje.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CORPORATIVO: TU EQUIPO PUEDE VIAJAR JUNTOS (image_1.png) -->
+  <section id="empresas" class="bg-gradient-to-b from-gray-900 to-emerald-950/20 py-20">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block py-1 px-3 mb-4 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold uppercase tracking-wider">
+          Vamos!! Empresas B2B
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6 leading-tight">
+          Tu equipo puede <span class="text-emerald-400">viajar juntos.</span>
+        </h2>
+        <p class="text-gray-200 text-lg mb-6 leading-relaxed">
+          Pensado para las grandes organizaciones como Sofía, que buscan brindar bienestar, puntualidad y seguridad a sus colaboradores en el traslado diario a plantas y oficinas.
+        </p>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-3">
+            <span class="text-emerald-400 font-bold mt-0.5">🔒</span>
+            <span class="text-gray-300 text-sm"><strong>Entornos exclusivos y seguros:</strong> Filtro mediante correo institucional para que solo el personal de tu empresa comparta el auto.</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-emerald-400 font-bold mt-0.5">🌿</span>
+            <span class="text-gray-300 text-sm"><strong>Reducción de huella:</strong> Menos autos individuales reducen el tráfico local, las emisiones de CO₂ y la demanda de parqueo.</span>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-emerald-400 font-bold mt-0.5">⚡</span>
+            <span class="text-gray-300 text-sm"><strong>Fácil de adoptar:</strong> Sin fricciones técnicas, lanzamos un piloto cerrado adaptado a las rutas de tus colaboradores.</span>
+          </div>
+        </div>
+        <a href="mailto:contacto@vamos.bo?subject=Quiero solicitar un Piloto Corporativo para mi Empresa" class="inline-block px-8 py-4 rounded-full bg-brand-yellow text-gray-950 font-extrabold hover:bg-yellow-400 transition transform hover:-translate-y-0.5 duration-200">
+          Exploremos un piloto para tu empresa
+        </a>
+      </div>
+
+      <div class="flex justify-center">
+        <!-- Arte corporativo integrado (image_1.png) -->
+        <img src="image_1.png" alt="Piloto carpool corporativo para equipos" class="w-full max-w-md rounded-3xl shadow-2xl border border-emerald-900/40 hover:scale-[1.02] transition-transform duration-300">
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PIE DE PÁGINA (FOOTER) -->
+  <footer class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800/80 gap-6">
+    <div class="flex items-center gap-3">
+      <img src="image_0.png" alt="Isotipo Vamos" class="h-8 w-auto">
+      <div class="flex flex-col">
+        <span class="font-bold text-white text-sm">Vamos!!</span>
+        <span>La unión es la fuerza</span>
+      </div>
+    </div>
+    
+    <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-center">
+      <a href="mailto:contacto@vamos.bo" class="hover:text-white transition">contacto@vamos.bo</a>
+      <span>📍 Santa Cruz de la Sierra, Bolivia</span>
+      <span>© 2026 ¡Vamos! Carpool. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
