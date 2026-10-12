@@ -30,7 +30,7 @@
     </nav>
 
     <div>
-      <a href="https://wa.me/59170000000?text=Hola!%20Quiero%20unirme%20al%20piloto%20de%20Vamos!!" 
+      <a href="https://wa.me/59176008546?text=Hola!%20Quiero%20unirme%20al%20piloto%20de%20Vamos!!" 
          target="_blank"
          class="px-5 py-2.5 rounded-full bg-brand-yellow text-gray-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-yellow-500/10">
         Unirse al Piloto
