@@ -12,14 +12,19 @@ jobs:
   web:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.47.2'
           channel: stable
-      - run: unzip -q Vamos_MVP_Fullstack_1.9.7.zip -d proyecto
-           - name: Preparar plataforma web
+
+      - name: Descomprimir versión 1.9.7
+        run: unzip -q Vamos_MVP_Fullstack_1.9.7.zip -d proyecto
+
+      - name: Preparar plataforma web
         run: flutter create --platforms=web --project-name=vamos_app .
         working-directory: proyecto/vamos_app
 
@@ -27,14 +32,22 @@ jobs:
         run: rm -f test/widget_test.dart
         working-directory: proyecto/vamos_app
 
-      - run: flutter pub get
+      - name: Instalar dependencias
+        run: flutter pub get
         working-directory: proyecto/vamos_app
+
+      - name: Analizar aplicación
+        run: flutter analyze --no-fatal-infos --no-fatal-warnings
         working-directory: proyecto/vamos_app
-      - run: flutter test
+
+      - name: Ejecutar pruebas
+        run: flutter test
         working-directory: proyecto/vamos_app
+
       - name: Compilar web para Render
         run: flutter build web --release --base-href / --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
         working-directory: proyecto/vamos_app
+
       - uses: actions/upload-artifact@v4
         with:
           name: Vamos-Web
