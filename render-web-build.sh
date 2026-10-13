@@ -1,165 +1,37 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vamos!! - Carpool en Bolivia</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .bg-brand-dark { background-color: #111820; }
-    .text-brand-yellow { color: #f5b82e; }
-    .bg-brand-yellow { background-color: #f5b82e; }
-  </style>
-</head>
-<body class="bg-brand-dark text-white font-sans antialiased selection:bg-yellow-400 selection:text-black">
+#!/usr/bin/env bash
+set -euo pipefail
 
-  <!-- 1. HEADER -->
-  <header class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center border-b border-gray-800/80">
-    <div class="flex items-center gap-3">
-      <img src="logo.jpg" alt="Logo Vamos!!" class="h-12 w-auto object-contain rounded-lg">
-      <div class="flex flex-col">
-        <span class="text-2xl font-bold tracking-tight">Vamos<span class="text-brand-yellow">!!</span></span>
-        <span class="text-[9px] uppercase tracking-wider text-gray-400 -mt-1 font-semibold">La unión es la fuerza</span>
-      </div>
-    </div>
-    
-    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-      <a href="#como-funciona" class="hover:text-white transition">Cómo funciona</a>
-      <a href="#conductores" class="hover:text-white transition">Conductores</a>
-      <a href="#empresas" class="hover:text-white transition">Empresas</a>
-    </nav>
+project_dir="$PWD/proyecto"
+flutter_dir="$PWD/.flutter-sdk"
+source_zip="$PWD/Vamos_MVP_Fullstack_1.9.7.zip"
 
-    <div>
-      <a href="https://wa.me/59176008546?text=Hola!%20Quiero%20unirme%20al%20piloto%20de%20Vamos!!" 
-         target="_blank"
-         class="px-5 py-2.5 rounded-full bg-brand-yellow text-gray-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-yellow-500/10">
-        Unirse al Piloto
-      </a>
-    </div>
-  </header>
+if [[ ! -f "$source_zip" ]]; then
+  echo "No se encontró Vamos_MVP_Fullstack_1.9.7.zip."
+  exit 1
+fi
 
-  <!-- 2. HERO SECTION -->
-  <section class="max-w-6xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <span class="inline-block py-1 px-3 mb-4 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-semibold tracking-wide uppercase">
-        Carpool en Bolivia 🇧🇴
-      </span>
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6">
-        Tu ruta de <span class="text-brand-yellow">siempre</span>, acompañado.
-      </h1>
-      <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-        Comparte auto, ahorra en cada viaje y llega con compañeros de confianza que van para el mismo lado en Santa Cruz de la Sierra.
-      </p>
-      
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a href="https://wa.me/59170000000?text=Hola!%20Quiero%20sumarme%20a%20la%20lista%20de%20espera" 
-           target="_blank"
-           class="px-8 py-4 rounded-full bg-brand-yellow text-gray-950 font-extrabold text-center hover:bg-yellow-400 hover:shadow-lg transition duration-200">
-          Súmate a la lista de espera
-        </a>
-        <a href="#como-funciona" class="px-8 py-4 rounded-full border border-gray-700 text-white font-semibold text-center hover:bg-gray-800/60 transition duration-200">
-          Descubrir más
-        </a>
-      </div>
-      <p class="text-xs text-gray-500 mt-4">Pruebas piloto abiertas • Próximamente en Play Store y App Store</p>
-    </div>
+rm -rf "$project_dir"
+mkdir -p "$project_dir"
+unzip -q "$source_zip" -d "$project_dir"
 
-    <!-- Imagen Principal: ruta.jpeg -->
-    <div class="relative flex justify-center">
-      <div class="rounded-3xl overflow-hidden shadow-2xl border border-gray-800 max-w-sm w-full">
-        <img src="ruta.jpeg" alt="Tu ruta de siempre, acompañado" class="w-full h-auto object-cover">
-      </div>
-    </div>
-  </section>
+if [[ ! -x "$flutter_dir/bin/flutter" ]]; then
+  rm -rf "$flutter_dir"
+  git clone --depth 1 --branch 3.47.2 \
+    https://github.com/flutter/flutter.git "$flutter_dir"
+fi
 
-  <!-- 3. LOS TRES PILARES -->
-  <section id="como-funciona" class="bg-gray-950/40 border-y border-gray-800/50 py-16">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3">La manera más inteligente de moverte</h2>
-        <p class="text-gray-400 text-sm">Ahorro y confianza mutua en tus trayectos cotidianos.</p>
-      </div>
+export PATH="$flutter_dir/bin:$PATH"
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center">
-          <div class="w-16 h-16 mx-auto mb-4 bg-emerald-950/50 border border-emerald-500/20 rounded-full flex items-center justify-center text-3xl">👥</div>
-          <h3 class="text-lg font-bold text-white mb-2">Comparte el viaje</h3>
-          <p class="text-sm text-gray-300">Conecta con compañeros de tu misma zona y lugar de trabajo.</p>
-        </div>
-        <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center">
-          <div class="w-16 h-16 mx-auto mb-4 bg-yellow-950/40 border border-yellow-500/20 rounded-full flex items-center justify-center text-3xl">🪙</div>
-          <h3 class="text-lg font-bold text-white mb-2">Comparte los gastos</h3>
-          <p class="text-sm text-gray-300">Frente al costo del combustible, dividan gastos de forma justa.</p>
-        </div>
-        <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center">
-          <div class="w-16 h-16 mx-auto mb-4 bg-emerald-950/50 border border-emerald-500/20 rounded-full flex items-center justify-center text-3xl">📍</div>
-          <h3 class="text-lg font-bold text-white mb-2">Encuentra compañía</h3>
-          <p class="text-sm text-gray-300">Haz de tu trayecto diario una experiencia más amena y segura.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+cd "$project_dir/vamos_app"
 
-  <!-- 4. CONDUCTORES: combustible.jpg -->
-  <section id="conductores" class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center border-b border-gray-800/80">
-    <div class="order-2 md:order-1 flex justify-center">
-      <img src="combustible.jpg" alt="Que el gasto no viaje solo" class="w-full max-w-md rounded-3xl shadow-xl border border-gray-800">
-    </div>
-    <div class="order-1 md:order-2">
-      <span class="inline-block py-1 px-3 mb-4 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase">
-        Para Conductores
-      </span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6 leading-tight">
-        Que el gasto <span class="text-brand-yellow">no viaje solo.</span>
-      </h2>
-      <p class="text-gray-300 text-lg leading-relaxed mb-6">
-        Frente al constante incremento del combustible, no hagas tu ruta solo. Comparte los asientos libres con compañeros verificados que van por tu mismo trayecto.
-      </p>
-      <div class="space-y-3 text-gray-300">
-        <div class="flex items-center gap-3"><span class="text-emerald-500">✓</span> Ahorro directo en combustible mensual.</div>
-        <div class="flex items-center gap-3"><span class="text-emerald-500">✓</span> Tú defines horarios y paradas.</div>
-        <div class="flex items-center gap-3"><span class="text-emerald-500">✓</span> Validación de perfiles de la comunidad.</div>
-      </div>
-    </div>
-  </section>
+flutter config --enable-web
+flutter create --platforms=web --project-name=vamos_app .
 
-  <!-- 5. EMPRESAS: equipo.jpg -->
-  <section id="empresas" class="bg-gradient-to-b from-gray-900 to-emerald-950/20 py-20">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <span class="inline-block py-1 px-3 mb-4 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold uppercase tracking-wider">
-          Vamos!! Empresas B2B
-        </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6 leading-tight">
-          Tu equipo puede <span class="text-emerald-400">viajar juntos.</span>
-        </h2>
-        <p class="text-gray-200 text-lg mb-6 leading-relaxed">
-          Diseñado para industrias y corporaciones que buscan puntualidad, descongestionamiento de parqueos y reducción de huella de carbono para sus colaboradores.
-        </p>
-        <a href="https://wa.me/59176008546?text=Hola!%20Me%20interesa%20un%20piloto%20corporativo%20para%20mi%20empresa" 
-           target="_blank"
-           class="inline-block px-8 py-4 rounded-full bg-brand-yellow text-gray-950 font-extrabold hover:bg-yellow-400 transition">
-          Exploremos un piloto para tu empresa
-        </a>
-      </div>
+rm -f test/widget_test.dart
 
-      <div class="flex justify-center">
-        <img src="equipo.jpg" alt="Tu equipo puede viajar juntos" class="w-full max-w-md rounded-3xl shadow-2xl border border-emerald-900/40">
-      </div>
-    </div>
-  </section>
+flutter pub get
 
-  <!-- 6. FOOTER -->
-  <footer class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800/80 gap-4">
-    <div class="flex items-center gap-3">
-      <img src="logo.jpg" alt="Isotipo Vamos" class="h-8 w-auto">
-      <span class="font-bold text-white text-sm">Vamos!! • La unión es la fuerza</span>
-    </div>
-    <div class="flex gap-6 items-center">
-      <span>📍 Santa Cruz de la Sierra, Bolivia</span>
-      <span>© 2026 ¡Vamos! Carpool</span>
-    </div>
-  </footer>
-
-</body>
-</html>
+flutter build web \
+  --release \
+  --base-href / \
+  --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
