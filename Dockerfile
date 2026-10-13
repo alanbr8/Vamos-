@@ -5,7 +5,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /source
-COPY Vamos_MVP_Fullstack_1.9.2.zip /tmp/vamos.zip
+COPY Vamos_MVP_Fullstack_1.9.7.zip /tmp/vamos.zip
 RUN unzip -q /tmp/vamos.zip -d /source
 
 WORKDIR /source/backend
