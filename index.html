@@ -22,20 +22,20 @@
       </div>
     </div>
     
-    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-300">
       <a href="#como-funciona" class="hover:text-white transition">Cómo funciona</a>
       <a href="#comunidades" class="hover:text-white transition">Comunidades</a>
       <a href="#pasajeros" class="hover:text-white transition">Pasajeros</a>
       <a href="#conductores" class="hover:text-white transition">Conductores</a>
       <a href="#seguridad" class="hover:text-white transition">Seguridad & SOAT</a>
+      <a href="#descargar" class="hover:text-white transition text-brand-yellow font-bold">📲 Descargar App</a>
       <a href="#empresas" class="hover:text-white transition">Empresas</a>
     </nav>
 
     <div>
-      <a href="https://vamos-web.onrender.com" 
-         target="_blank"
+      <a href="#descargar" 
          class="px-5 py-2.5 rounded-full bg-brand-yellow text-gray-950 font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-yellow-500/10">
-        Entrar a la App
+        Instalar App
       </a>
     </div>
   </header>
@@ -50,20 +50,21 @@
         Tu ruta de <span class="text-brand-yellow">siempre</span>, acompañado.
       </h1>
       <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-        Conectamos conductores y pasajeros por comunidades: tu universidad, barrio, empresa o filtros de confianza como <strong>Solo Mujeres</strong>. Viaja seguro, cómodo y dividiendo gastos en Santa Cruz.
+        Conectamos conductores y pasajeros por comunidades: universidad, barrio, empresa o filtros de confianza como <strong>Solo Mujeres</strong>. Viaja seguro, cómodo y dividiendo gastos en Santa Cruz.
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#descargar" 
+           class="px-8 py-4 rounded-full bg-brand-yellow text-gray-950 font-extrabold text-center hover:bg-yellow-400 hover:shadow-lg transition duration-200">
+          📲 Descargar / Instalar
+        </a>
         <a href="https://vamos-web.onrender.com" 
            target="_blank"
-           class="px-8 py-4 rounded-full bg-brand-yellow text-gray-950 font-extrabold text-center hover:bg-yellow-400 hover:shadow-lg transition duration-200">
-          Registrarme en Vamos!!
-        </a>
-        <a href="#comunidades" class="px-8 py-4 rounded-full border border-gray-700 text-white font-semibold text-center hover:bg-gray-800/60 transition duration-200">
-          Ver Comunidades
+           class="px-8 py-4 rounded-full border border-gray-700 text-white font-semibold text-center hover:bg-gray-800/60 transition duration-200">
+          Abrir Web App
         </a>
       </div>
-      <p class="text-xs text-gray-500 mt-4">Comunidades verificadas • SOAT obligatorio • Web App disponible</p>
+      <p class="text-xs text-gray-500 mt-4">Comunidades verificadas • SOAT obligatorio • Compatible con Android e iPhone</p>
     </div>
 
     <!-- Imagen Principal: ruta.jpeg -->
@@ -91,18 +92,18 @@
         <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center">
           <div class="w-16 h-16 mx-auto mb-4 bg-yellow-950/40 border border-yellow-500/20 rounded-full flex items-center justify-center text-3xl">🪙</div>
           <h3 class="text-lg font-bold text-white mb-2">Comparte los gastos</h3>
-          <p class="text-sm text-gray-300">Divide de forma justa los costos de combustible. Menos que un taxi, más rápido que el micro.</p>
+          <p class="text-sm text-gray-300">Divide de forma justa los costos de combustible. Menos que un taxi, más cómodo y rápido que el micro.</p>
         </div>
         <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800 text-center">
           <div class="w-16 h-16 mx-auto mb-4 bg-emerald-950/50 border border-emerald-500/20 rounded-full flex items-center justify-center text-3xl">📍</div>
           <h3 class="text-lg font-bold text-white mb-2">Encuentra compañía</h3>
-          <p class="text-sm text-gray-300">Haz de tu trayecto diario una experiencia amena, cómoda y con usuarios validados.</p>
+          <p class="text-sm text-gray-300">Haz de tu trayecto diario una experiencia amena, cómoda y con usuarios verificados.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. NUEVA SECCIÓN: COMUNIDADES DE CONFIANZA -->
+  <!-- 4. COMUNIDADES DE CONFIANZA -->
   <section id="comunidades" class="py-20 max-w-6xl mx-auto px-6 border-b border-gray-800/80">
     <div class="text-center max-w-3xl mx-auto mb-16">
       <span class="inline-block py-1 px-3 mb-3 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow text-xs font-semibold uppercase">
@@ -112,55 +113,43 @@
         Tú eliges con quién viajar en cada trayecto
       </h2>
       <p class="text-gray-400 text-base">
-        En Vamos!! puedes integrarte a comunidades específicas para compartir viaje exclusivamente con personas que comparten tu mismo entorno diario.
+        En Vamos!! puedes integrarte a comunidades específicas para compartir viaje exclusivamente con personas de tu mismo entorno.
       </p>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Tarjeta 1: Por Barrio / Zona -->
       <div class="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-brand-yellow/50 transition">
-        <div class="w-12 h-12 mb-4 rounded-xl bg-yellow-500/10 text-brand-yellow flex items-center justify-center text-2xl font-bold">
-          🏡
-        </div>
+        <div class="w-12 h-12 mb-4 rounded-xl bg-yellow-500/10 text-brand-yellow flex items-center justify-center text-2xl font-bold">🏡</div>
         <h3 class="text-lg font-bold text-white mb-2">Por Barrio o Zona</h3>
         <p class="text-gray-400 text-xs leading-relaxed">
-          Comparte ruta con vecinos de tu mismo condominio o barrio (Urubó, Equipetrol, Las Palmas, Villa 1ro de Mayo) que van hacia las mismas avenidas de la ciudad.
+          Comparte ruta con vecinos de tu mismo condominio o barrio (Urubó, Equipetrol, Las Palmas, Banzer) hacia avenidas principales.
         </p>
       </div>
 
-      <!-- Tarjeta 2: Por Universidad -->
       <div class="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-brand-yellow/50 transition">
-        <div class="w-12 h-12 mb-4 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl font-bold">
-          🎓
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2">Comunidad Universitaria</h3>
+        <div class="w-12 h-12 mb-4 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl font-bold">🎓</div>
+        <h3 class="text-lg font-bold text-white mb-2">Universidades</h3>
         <p class="text-gray-400 text-xs leading-relaxed">
-          Grupos cerrados validados con correo institucional para estudiantes y docentes (UPSA, UAGRM, UTEPSA, Católica). Salidas coordinadas después de clases.
+          Grupos cerrados con correo institucional para estudiantes y docentes (UPSA, UAGRM, UTEPSA, Católica).
         </p>
       </div>
 
-      <!-- Tarjeta 3: Solo Mujeres -->
       <div class="p-6 rounded-2xl bg-gray-900/50 border border-purple-500/30 hover:border-purple-400 transition bg-gradient-to-b from-transparent to-purple-950/10">
-        <div class="w-12 h-12 mb-4 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-2xl font-bold">
-          👩
-        </div>
+        <div class="w-12 h-12 mb-4 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center text-2xl font-bold">👩</div>
         <div class="flex items-center gap-2 mb-2">
           <h3 class="text-lg font-bold text-white">Solo Mujeres</h3>
           <span class="text-[10px] bg-purple-500/30 text-purple-300 px-2 py-0.5 rounded-full font-semibold">Exclusivo</span>
         </div>
         <p class="text-gray-400 text-xs leading-relaxed">
-          Opción para que conductoras y pasajeras coordinen viajes únicamente entre mujeres, brindando máxima tranquilidad, protección y comodidad en cada ruta.
+          Coordinación de viajes únicamente entre conductoras y pasajeras verificadas, brindando máxima protección y tranquilidad.
         </p>
       </div>
 
-      <!-- Tarjeta 4: Empresas & Trabajo -->
       <div class="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-brand-yellow/50 transition">
-        <div class="w-12 h-12 mb-4 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl font-bold">
-          🏢
-        </div>
-        <h3 class="text-lg font-bold text-white mb-2">Empresas & Negocios</h3>
+        <div class="w-12 h-12 mb-4 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl font-bold">🏢</div>
+        <h3 class="text-lg font-bold text-white mb-2">Empresas</h3>
         <p class="text-gray-400 text-xs leading-relaxed">
-          Redes corporativas para colaboradores de empresas e industrias (Parque Industrial, centros corporativos) que comparten horarios fijos de entrada y salida.
+          Redes corporativas para colaboradores de empresas e industrias con horarios fijos de entrada y salida.
         </p>
       </div>
     </div>
@@ -176,7 +165,7 @@
         Llega a tu destino <span class="text-brand-yellow">por mucho menos.</span>
       </h2>
       <p class="text-gray-300 text-lg leading-relaxed mb-6">
-        ¿Cansado del micro lleno o de tarifas excesivas en taxis de app todos los días? Reserva un asiento libre en el auto de un colega, vecino o alguien que haga tu misma ruta.
+        ¿Cansado del micro lleno o de tarifas excesivas en taxis de app todos los días? Reserva un asiento libre en el auto de un colega, estudiante o vecino de tu comunidad.
       </p>
       
       <div class="space-y-4 text-gray-300">
@@ -191,7 +180,7 @@
           <span class="text-brand-yellow text-xl font-bold">✓</span>
           <div>
             <strong class="text-white">Confort y puntualidad:</strong>
-            <p class="text-sm text-gray-400">Viaja cómodo, sentado y sin trasbordos innecesarios.</p>
+            <p class="text-sm text-gray-400">Viaja con aire acondicionado, sentado y sin transbordos innecesarios.</p>
           </div>
         </div>
         <div class="flex items-start gap-3">
@@ -204,10 +193,9 @@
       </div>
 
       <div class="mt-8">
-        <a href="https://vamos-web.onrender.com" 
-           target="_blank"
+        <a href="#descargar" 
            class="inline-block px-7 py-3.5 rounded-full bg-brand-yellow text-gray-950 font-bold text-sm hover:scale-105 transition">
-          Buscar viajes como pasajero
+          Descargar para viajar
         </a>
       </div>
     </div>
@@ -234,16 +222,15 @@
         Frente al constante incremento del combustible, no hagas tu ruta solo. Comparte los asientos libres con compañeros verificados de tu misma comunidad.
       </p>
       <div class="space-y-3 text-gray-300">
-        <div class="flex items-center gap-3"><span class="text-emerald-500 font-bold">✓</span> Recupera hasta el 60% de tu gasto mensual en combustible.</div>
+        <div class="flex items-center gap-3"><span class="text-emerald-500 font-bold">✓</span> Recupera gastos mensuales en combustible.</div>
         <div class="flex items-center gap-3"><span class="text-emerald-500 font-bold">✓</span> Tú defines tus horarios y paradas convenientes.</div>
         <div class="flex items-center gap-3"><span class="text-emerald-500 font-bold">✓</span> Elige a quién llevar dentro de tu red o comunidad de preferencia.</div>
       </div>
 
       <div class="mt-8">
-        <a href="https://vamos-web.onrender.com" 
-           target="_blank"
+        <a href="#descargar" 
            class="inline-block px-7 py-3.5 rounded-full border border-gray-600 text-white font-bold text-sm hover:bg-gray-800 transition">
-          Publicar mis asientos libres
+          Descargar para conductores
         </a>
       </div>
     </div>
@@ -292,7 +279,111 @@
     </div>
   </section>
 
-  <!-- 8. EMPRESAS: equipo.jpeg -->
+  <!-- 8. NUEVA SECCIÓN: CÓMO DESCARGAR E INSTALAR (ANDROID & IPHONE) -->
+  <section id="descargar" class="py-20 max-w-6xl mx-auto px-6 border-b border-gray-800/80">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="inline-block py-1 px-3 mb-3 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow text-xs font-semibold uppercase">
+        Instalación Inmediata
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+        Descarga e instala Vamos!! en tu celular
+      </h2>
+      <p class="text-gray-400 text-sm">
+        Sigue estos sencillos pasos para tener la aplicación en tu pantalla principal en menos de un minuto.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 items-stretch">
+      
+      <!-- TARJETA ANDROID -->
+      <div class="p-8 rounded-3xl bg-gray-900/60 border border-gray-800 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-3xl text-emerald-400">
+              🤖
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">Android</h3>
+              <p class="text-xs text-gray-400">Descarga directa APK o desde Chrome</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-400 mb-4 font-semibold uppercase tracking-wider">Opción A: Instalación desde Chrome (Recomendada)</p>
+          <ol class="space-y-3 text-sm text-gray-300 mb-6">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs flex items-center justify-center">1</span>
+              <span>Abre el navegador <strong>Chrome</strong> en tu celular.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs flex items-center justify-center">2</span>
+              <span>Toca los <strong>3 puntos (⋮)</strong> en la esquina superior derecha.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-xs flex items-center justify-center">3</span>
+              <span>Selecciona <strong>"Instalar aplicación"</strong> o "Añadir a pantalla principal".</span>
+            </li>
+          </ol>
+
+          <p class="text-xs text-gray-400 mb-2 font-semibold uppercase tracking-wider">Opción B: Instalador directo APK</p>
+          <p class="text-xs text-gray-400">Descarga el archivo APK y presiona "Instalar" aceptando permisos de tu navegador.</p>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-800 flex flex-col sm:flex-row gap-3">
+          <a href="https://vamos-web.onrender.com" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-bold text-center text-sm transition">
+            Abrir App Web
+          </a>
+          <!-- Si subes tu archivo apk como vamos.apk en la raíz del repositorio, este botón lo descarga de una vez -->
+          <a href="vamos.apk" download class="flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-center text-sm transition flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-500/20">
+            <span>⬇️</span> Descargar APK
+          </a>
+        </div>
+      </div>
+
+      <!-- TARJETA IPHONE (iOS) -->
+      <div class="p-8 rounded-3xl bg-gray-900/60 border border-gray-800 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-3xl text-white">
+              
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">iPhone (iOS)</h3>
+              <p class="text-xs text-gray-400">Instalación rápida a través de Safari</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-yellow-400/90 mb-4 font-semibold uppercase tracking-wider">⚠️ Importante: Realizar desde el navegador Safari</p>
+          <ol class="space-y-4 text-sm text-gray-300">
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-yellow/20 text-brand-yellow font-bold text-xs flex items-center justify-center">1</span>
+              <span>Abre <strong>Safari</strong> (el navegador oficial de Apple en tu iPhone).</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-yellow/20 text-brand-yellow font-bold text-xs flex items-center justify-center">2</span>
+              <span>Ingresa al botón de abajo para ir a la aplicación: <code class="text-brand-yellow bg-gray-800 px-1 py-0.5 rounded text-xs">vamos-web.onrender.com</code></span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-yellow/20 text-brand-yellow font-bold text-xs flex items-center justify-center">3</span>
+              <span>Toca el botón <strong>Compartir</strong> (el cuadrado con flecha hacia arriba <span class="text-base">⎋</span> en la barra inferior).</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-yellow/20 text-brand-yellow font-bold text-xs flex items-center justify-center">4</span>
+              <span>Desliza las opciones y pulsa <strong>"Añadir a pantalla de inicio"</strong> y confirma con <strong>Añadir</strong>.</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-800">
+          <a href="https://vamos-web.onrender.com" target="_blank" class="w-full block py-3.5 px-4 rounded-xl bg-brand-yellow text-gray-950 hover:bg-yellow-400 font-bold text-center text-sm transition">
+            Abrir en Safari e Instalar
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. EMPRESAS: equipo.jpeg -->
   <section id="empresas" class="bg-gradient-to-b from-gray-900 to-emerald-950/20 py-20">
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
       <div>
@@ -305,7 +396,7 @@
         <p class="text-gray-200 text-lg mb-6 leading-relaxed">
           Diseñado para corporaciones e industrias que buscan puntualidad, descongestionamiento de estacionamientos y menor huella de carbono para sus colaboradores.
         </p>
-        <a href="https://wa.me/59176008546?text=Hola!%20Me%20interesa%20un%20piloto%20corporativo%20de%20Vamos!!%20para%20mi%20empresa" 
+        <a href="https://wa.me/59170000000?text=Hola!%20Me%20interesa%20un%20piloto%20corporativo%20de%20Vamos!!%20para%20mi%20empresa" 
            target="_blank"
            class="inline-block px-8 py-4 rounded-full bg-brand-yellow text-gray-950 font-extrabold hover:bg-yellow-400 transition">
           Exploremos un piloto para tu empresa
@@ -318,15 +409,14 @@
     </div>
   </section>
 
-  <!-- 9. FOOTER -->
-   <!-- FOOTER ACTUALIZADO -->
+  <!-- 10. FOOTER CON ENLACES INDIVIDUALES -->
   <footer class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800/80 gap-4">
     <div class="flex items-center gap-3">
       <span class="font-bold text-white text-sm">Vamos!! • La unión es la fuerza</span>
     </div>
     
-    <!-- Enlaces Legales -->
-    <div class="flex gap-4 text-gray-400">
+    <!-- Enlaces Legales con anclas específicas -->
+    <div class="flex flex-wrap gap-4 text-gray-400 justify-center">
       <a href="terminos.html" class="hover:text-brand-yellow transition underline">Términos y Condiciones</a>
       <span>•</span>
       <a href="terminos.html#soat" class="hover:text-brand-yellow transition underline">Seguridad & SOAT</a>
@@ -339,7 +429,6 @@
       <span>© 2026 ¡Vamos!</span>
     </div>
   </footer>
-
 
 </body>
 </html>
