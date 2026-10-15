@@ -1,80 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Términos, Condiciones y Privacidad - Vamos!!</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Términos y Privacidad · Vamos!!</title>
   <style>
-    .bg-brand-dark { background-color: #111820; }
-    .text-brand-yellow { color: #f5b82e; }
+    :root{color-scheme:dark;--green:#07884d;--yellow:#f5b82e;--ink:#111820;--card:#1a232d;--muted:#b5bec7}
+    *{box-sizing:border-box}body{margin:0;background:var(--ink);color:#eef2f4;font:16px/1.65 system-ui,sans-serif}
+    main{max-width:900px;margin:auto;padding:32px 20px 70px}.hero,.card{background:var(--card);border:1px solid #303b46;border-radius:20px;padding:24px;margin-bottom:18px}
+    h1{margin:.2em 0;color:white}h2{color:var(--yellow);margin-top:0}h3{color:#fff;margin-bottom:.2em}p{color:var(--muted)}
+    nav{display:flex;gap:12px;flex-wrap:wrap}a{color:#79ddb0}.pill{padding:8px 14px;background:#0b633e;border-radius:999px;color:white;text-decoration:none}
+    .version{font-weight:700;color:#fff}.notice{border-left:4px solid var(--yellow);padding-left:14px}
   </style>
 </head>
-<body class="bg-brand-dark text-gray-300 font-sans antialiased py-12 px-6">
-  <div class="max-w-4xl mx-auto bg-gray-900/60 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-xl space-y-8">
-    
-    <!-- Encabezado -->
-    <div class="border-b border-gray-800 pb-6 flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-extrabold text-white">Términos y Condiciones de Uso</h1>
-        <p class="text-xs text-gray-400 mt-1">Plataforma Vamos!! • Santa Cruz de la Sierra, Bolivia • Actualizado a 2026</p>
-      </div>
-      <a href="index.html" class="text-xs text-brand-yellow hover:underline">← Volver al inicio</a>
-    </div>
+<body><main>
+  <header class="hero"><p class="version">Versión vigente: 15 de octubre de 2026</p><h1>Vamos!! · Términos y Privacidad</h1>
+  <nav><a class="pill" href="#terminos">Términos</a><a class="pill" href="#privacidad">Privacidad</a><a class="pill" href="#soat">Seguridad y SOAT</a></nav></header>
 
-    <!-- 1. Naturaleza del Servicio -->
-    <section class="space-y-3">
-      <h2 class="text-xl font-bold text-white">1. Naturaleza del Servicio (No Transporte Público)</h2>
-      <p class="text-sm leading-relaxed">
-        <strong>Vamos!!</strong> es una plataforma tecnológica de intermediación entre particulares que coinciden en rutas habituales con el único fin de compartir gastos de transporte (combustible y peajes). Vamos!! <strong>no</strong> presta servicios de taxi, radiomóvil ni transporte automotor remunerado comercial, ni mantiene relación laboral de subordinación con los conductores o pasajeros.
-      </p>
-    </section>
+  <section id="terminos" class="card"><h2>Términos y Condiciones de Uso</h2>
+    <h3>1. Naturaleza del servicio</h3><p>Vamos!! es una plataforma tecnológica que facilita el contacto entre personas particulares que coinciden en rutas y desean compartir asientos y gastos razonables de combustible y peajes. No presta servicios de taxi, radiomóvil o transporte público, no fija una tarifa comercial ni mantiene relación laboral con conductores o pasajeros.</p>
+    <h3>2. Requisitos</h3><p>Para registrarse se debe declarar tener 18 años o más, proporcionar información real y mantener segura la cuenta. La identidad puede ser revisada mediante carnet, selfie y foto de perfil. Las comunidades cerradas pueden exigir información adicional vinculada a la institución o grupo.</p>
+    <h3 id="soat">3. Conductor, vehículo y SOAT</h3><p>Para ofrecer viajes se requiere identidad y foto de perfil aprobadas, licencia de conducir vigente, vehículo registrado y verificado, fotografías del vehículo y SOAT vigente. El conductor debe respetar las normas de tránsito, la capacidad del vehículo y no conducir bajo influencia de alcohol, drogas o medicamentos que comprometan la conducción.</p>
+    <h3>4. Pasajero</h3><p>El pasajero debe tener identidad y foto aprobadas, acordar su Punto Vamos! y punto de bajada, mantener un trato respetuoso, presentarse puntualmente y pagar únicamente el aporte informado para compartir gastos.</p>
+    <h3>5. Reservas y cancelaciones</h3><p>Una solicitud queda confirmada cuando el conductor la acepta. Las cancelaciones deben incluir un motivo. Ausencias, fraude, acoso, información falsa o conductas peligrosas pueden generar advertencia, suspensión temporal o bloqueo definitivo, con revisión de Operaciones.</p>
+    <h3>6. Seguridad</h3><p>El código de encuentro ayuda a confirmar a los participantes. Ubicación, alertas y SOS son herramientas de apoyo y no sustituyen a la Policía, emergencias médicas, SOAT u otros servicios oficiales.</p>
+    <h3>7. Aportes</h3><p>Los aportes corresponden al reparto de gastos. El pago puede realizarse en efectivo o por QR cuando las partes lo acuerden. Vamos!! no almacena credenciales bancarias ni garantiza transacciones realizadas fuera de la plataforma.</p>
+    <h3>8. Suspensión, bloqueo y eliminación</h3><p>Operaciones puede suspender o bloquear una cuenta por riesgo, fraude, acoso, incumplimiento reiterado o requerimiento legal. La persona puede solicitar revisión o eliminación mediante RespondeYa. La eliminación estará sujeta a conservar, bloquear o anonimizar registros necesarios para seguridad, auditoría, reclamos o bitácora regulatoria.</p>
+    <h3>9. Disponibilidad</h3><p>La plataforma funciona según disponibilidad y puede verse afectada por conectividad, GPS, mapas o proveedores externos. Cada participante conserva la responsabilidad por su conducta, vehículo y cumplimiento normativo.</p>
+    <h3>10. Ley aplicable</h3><p>Los términos se interpretan conforme a las leyes del Estado Plurinacional de Bolivia. Los reclamos deben presentarse inicialmente mediante el soporte oficial.</p>
+  </section>
 
-    <!-- 2. Requisitos y Verificación -->
-    <section class="space-y-3">
-      <h2 class="text-xl font-bold text-white">2. Verificación de Identidad y Comunidades</h2>
-      <p class="text-sm leading-relaxed">
-        Todo usuario declara ser mayor de 18 años y aportar datos reales (Cédula de Identidad, número de contacto y credenciales de instituciones o empresas asociadas). El acceso a comunidades cerradas (universidades, empresas como Sofía o filtros de "Solo Mujeres") está condicionado a la validación estricta de sus perfiles.
-      </p>
-    </section>
-
-    <!-- 3. Obligaciones del Conductor y SOAT -->
-    <section class="space-y-3">
-      <h2 class="text-xl font-bold text-white">3. Obligaciones del Conductor y SOAT Obligatorio</h2>
-      <p class="text-sm leading-relaxed">
-        Para publicar viajes, el conductor debe contar con licencia de conducir categoría particular vigente, Inspección Técnica Vehicular al día y portar de forma obligatoria el <strong>SOAT vigente</strong> con cobertura de seguro ante cualquier eventualidad vial conforme a las normas de tránsito bolivianas. Queda terminantemente prohibido conducir bajo influencia de alcohol o estupefacientes.
-      </p>
-    </section>
-
-    <!-- 4. Obligaciones del Pasajero -->
-    <section class="space-y-3">
-      <h2 class="text-xl font-bold text-white">4. Obligaciones del Pasajero y Cancelaciones</h2>
-      <p class="text-sm leading-relaxed">
-        El pasajero se compromete a la puntualidad en los puntos de encuentro coordinados, el abono del aporte convenido de combustible (en efectivo o vía Simple QR) y un trato respetuoso. Las cancelaciones imprevistas reiteradas o conductas antideportivas derivarán en la baja de la cuenta.
-      </p>
-    </section>
-
-    <!-- 5. Política de Privacidad -->
-    <section class="space-y-3">
-      <h2 class="text-xl font-bold text-white">5. Política de Privacidad y Protección de Datos</h2>
-      <p class="text-sm leading-relaxed">
-        En cumplimiento con la legislación boliviana (Ley N° 164), los datos personales, fotografías, documentos de identidad y geolocalizaciones recopilados son utilizados exclusivamente con fines de validación de seguridad, prevención de fraudes y coordinación logística interna de los viajes. No se comercializan con terceros bajo ningún concepto.
-      </p>
-    </section>
-
-    <!-- 6. Jurisdicción -->
-    <section class="space-y-3">
-      <h2 class="text-xl font-bold text-white">6. Jurisdicción y Ley Aplicable</h2>
-      <p class="text-sm leading-relaxed">
-        Estos términos se rigen bajo las leyes del Estado Plurinacional de Bolivia, sometiéndose las partes a los juzgados y tribunales de la ciudad de Santa Cruz de la Sierra ante cualquier controversia no subsanada.
-      </p>
-    </section>
-
-    <!-- Pie del documento -->
-    <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
-      © 2026 Vamos!! Carpool Bolivia • Soporte: contacto@vamosbolivia.com
-    </div>
-
-  </div>
-</body>
-</html>
+  <section id="privacidad" class="card"><h2>Política de Privacidad</h2>
+    <h3>1. Datos tratados</h3><p>Podemos tratar nombre, contacto, carnet, selfie, foto de perfil, licencia, datos y fotografías del vehículo, SOAT, comunidades, rutas, puntos de encuentro y bajada, ubicación durante el viaje, reservas, mensajes, calificaciones, incidentes, dispositivo de notificaciones y QR de cobro.</p>
+    <h3>2. Finalidades</h3><p>Los datos permiten crear y proteger la cuenta, verificar identidad y vehículo, buscar y coordinar viajes, enviar alertas, prevenir fraude, resolver incidentes, mantener la bitácora y cumplir obligaciones legales o regulatorias.</p>
+    <h3>3. Ubicación</h3><p>La ubicación se usa para seleccionar puntos, calcular rutas y, cuando el usuario activa el seguimiento, compartir el avance y generar alertas. El seguimiento no debe permanecer activo fuera del viaje. El permiso puede desactivarse, aunque algunas funciones dejarán de operar.</p>
+    <h3>4. Documentos y fotografías</h3><p>Los documentos privados se almacenan cifrados y solo pueden ser consultados por la cuenta titular y personal autorizado de Operaciones. No se muestran a otros usuarios. Solo la foto de perfil aprobada y la foto visible del vehículo aparecen en los viajes.</p>
+    <h3>5. Proveedores</h3><p>Los datos necesarios pueden ser visibles para los participantes y Operaciones. Vamos!! utiliza proveedores de infraestructura, base de datos, notificaciones, correo, mapas, rutas y soporte, entre ellos Render, Neon, Firebase, Resend, OpenRouteService y WhatsApp cuando el usuario abre RespondeYa. Los datos no se venden.</p>
+    <h3>6. Conservación</h3><p>La información se conserva mientras la cuenta esté activa o durante el plazo necesario para verificación, seguridad, reclamos, auditoría y obligaciones regulatorias. Cuando ya no deba mantenerse será eliminada o anonimizada.</p>
+    <h3>7. Seguridad</h3><p>Se aplican controles de acceso, cifrado de documentos, sesiones autenticadas y auditoría administrativa. Ante un incidente relevante se adoptarán medidas de contención y comunicación.</p>
+    <h3>8. Derechos</h3><p>La persona puede solicitar acceso, corrección, actualización, oposición o eliminación mediante RespondeYa. Puede requerirse confirmar su identidad y algunos registros podrán conservarse bloqueados o anonimizados por seguridad u obligación legal.</p>
+    <h3>9. Personas menores</h3><p>Vamos!! está destinado exclusivamente a personas de 18 años o más. Las cuentas identificadas como pertenecientes a menores serán bloqueadas y revisadas.</p>
+    <h3>10. Cambios</h3><p>Cuando exista un cambio material se publicará una nueva versión y podrá solicitarse una aceptación renovada.</p>
+  </section>
+  <section class="card notice"><strong>Contacto</strong><p>Consultas, corrección de datos y solicitudes de cuenta: soporte oficial RespondeYa dentro de Vamos!!.</p></section>
+</main></body></html>
