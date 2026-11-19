@@ -15,8 +15,7 @@ if [[ -d "$nested_dir/backend" ]]; then
   rm -rf "$nested_dir"
 fi
 
-cp "$project_dir/backend/revision-sofia.html" "$project_dir/admin/revision-sofia.html"
-cp "$project_dir/backend/revision-sofia.js" "$project_dir/admin/revision-sofia.js"
+python3 "$repo_dir/tool/sofia-review/prepare.py" "$project_dir"
 test -f "$project_dir/backend/src/review-panel.ts"
 
 cd "$project_dir/backend"
