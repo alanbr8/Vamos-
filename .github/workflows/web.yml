@@ -24,6 +24,9 @@ jobs:
       - name: Descomprimir versión 1.9.7
         run: unzip -q Vamos_MVP_Fullstack_1.9.7.zip -d proyecto
 
+      - name: Configurar cierre del chat
+        run: python3 tool/chat-expiry/apply.py proyecto
+
       - name: Agregar crédito INGENIX
         run: python3 tool/aplicar_credito_ingenix.py proyecto/vamos_app
 
