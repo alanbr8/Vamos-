@@ -13,7 +13,10 @@ RUN unzip -q /tmp/vamos.zip -d /tmp/vamos-source \
 
 WORKDIR /source/backend
 RUN npm ci
-RUN npm run build
+RUN printf '%s\n' '{"extends":"./tsconfig.json","compilerOptions":{"rootDir":"./src"},"include":["src/**/*.ts"],"exclude":["node_modules","dist","test","src/**/*.spec.ts"]}' > tsconfig.build.json \
+    && npm run build \
+    && test -f dist/main.js \
+    && test -f dist/review-panel.js
 
 FROM node:22-bookworm-slim AS runtime
 
