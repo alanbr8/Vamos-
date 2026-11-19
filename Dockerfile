@@ -6,7 +6,10 @@ RUN apt-get update \
 
 WORKDIR /source
 COPY Vamos_MVP_Fullstack_1.9.7_Revision_Sofia.zip /tmp/vamos.zip
-RUN unzip -q /tmp/vamos.zip -d /source
+RUN unzip -q /tmp/vamos.zip -d /tmp/vamos-source \
+    && cp -a "/tmp/vamos-source/Vamos_MVP_Fullstack_1.9.7 (1)/." /source/ \
+    && cp /source/backend/revision-sofia.html /source/admin/revision-sofia.html \
+    && cp /source/backend/revision-sofia.js /source/admin/revision-sofia.js
 
 WORKDIR /source/backend
 RUN npm ci
