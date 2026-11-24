@@ -1,0 +1,16 @@
+  <dialog id="userNameDialog" aria-labelledby="userNameTitle">
+    <form id="userNameForm">
+      <h2 id="userNameTitle">Corregir nombre del usuario</h2>
+      <p>El cambio quedará registrado con tu cuenta de administrador.</p>
+      <label>Nombres<input id="userFirstName" required minlength="2" maxlength="80" autocomplete="off"></label>
+      <label>Apellidos<input id="userLastName" required minlength="2" maxlength="80" autocomplete="off"></label>
+      <p id="userNameError" class="error" role="alert"></p>
+      <div class="actions"><button id="userNameSave" type="submit">Guardar cambios</button><button id="userNameCancel" type="button" class="secondary">Cancelar</button></div>
+    </form>
+  </dialog>
+  <dialog id="driverTripsDialog" aria-labelledby="driverTripsTitle">
+    <h2 id="driverTripsTitle">Viajes como conductor</h2>
+    <p>Hasta 200 viajes recientes. Encuentro confirmado = cuenta de pasajero cuyo código fue verificado. Asientos confirmados = suma de asientos de esas reservas; no identifica individualmente a acompañantes. Fechas en hora de Bolivia.</p>
+    <div class="table-wrap"><table><thead><tr><th>Recorrido</th><th>Salida</th><th>Estado</th><th>Reservas aceptadas o completadas</th><th>Pasajeros con encuentro confirmado</th><th>Asientos confirmados</th></tr></thead><tbody id="driverTripsRows"></tbody></table></div>
+    <button id="driverTripsClose" type="button" class="secondary">Cerrar</button>
+  </dialog>

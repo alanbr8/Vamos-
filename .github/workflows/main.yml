@@ -26,6 +26,7 @@ jobs:
           node-version: '22'
       - run: unzip -q Vamos_MVP_Fullstack_1.9.7.zip -d proyecto
       - run: python3 tool/chat-expiry/apply.py proyecto
+      - run: python3 tool/admin-users/apply.py proyecto
       - run: npm ci --include=dev
         working-directory: proyecto/backend
       - run: npm run build && npm test -- --runInBand

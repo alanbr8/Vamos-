@@ -17,6 +17,7 @@ fi
 
 python3 "$repo_dir/tool/sofia-review/prepare.py" "$project_dir"
 python3 "$repo_dir/tool/chat-expiry/apply.py" "$project_dir"
+python3 "$repo_dir/tool/admin-users/apply.py" "$project_dir"
 test -f "$project_dir/backend/src/review-panel.ts"
 
 cd "$project_dir/backend"
