@@ -17,6 +17,8 @@ for name in ['admin.service.ts','admin.controller.ts']:
 service = backend/'admin.service.ts'
 if 'async updateUserName(' not in service.read_text():
     replace_file(service, lambda text: re.sub(r'  users\(status\?: string\) \{.*?(?=  tripLedger\()', (source/'user-methods.ts').read_text(), text, count=1, flags=re.S))
+# Keep the overlay repairable when it is reapplied to an already-patched tree.
+replace_file(service, lambda text: text.replace("NULLIF(trim(b.cancellation_reason),'')", "NULLIF(trim(to_jsonb(b)->>'cancellation_reason'),'')"))
 controller = backend/'admin.controller.ts'
 if "@Patch('users/:id/name')" not in controller.read_text():
     replace_file(controller, lambda text: text.replace("  @Get('trip-ledger')", """  @Patch('users/:id/name') userName(@Req() req: AuthRequest, @Param('id') id: string, @Body() dto: AdminUserNameDto) {

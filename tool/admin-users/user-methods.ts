@@ -11,7 +11,7 @@
       ((SELECT count(*) FROM notifications n JOIN bookings b ON n.data->>'bookingId'=b.id::text
         JOIN trips t ON t.id=b.trip_id WHERE b.passenger_id=u.id AND n.type='BOOKING_CANCELLED' AND n.user_id=t.driver_id)
        + (SELECT count(*) FROM bookings b WHERE b.passenger_id=u.id AND b.status='CANCELLED'
-        AND NULLIF(trim(b.cancellation_reason),'') IS NOT NULL
+        AND NULLIF(trim(to_jsonb(b)->>'cancellation_reason'),'') IS NOT NULL
         AND NOT EXISTS(SELECT 1 FROM notifications n WHERE n.type='BOOKING_CANCELLED' AND n.data->>'bookingId'=b.id::text)))::int AS "passengerCancellations"
       FROM users u WHERE ($1::text IS NULL OR u.status::text=$1)
       ORDER BY u.created_at DESC,u.id LIMIT 100`, [status || null]);

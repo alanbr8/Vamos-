@@ -2,7 +2,7 @@
 
 Se aplica sobre el ZIP extraído con `python3 tool/admin-users/apply.py proyecto`.
 El build de la API en Render lo aplica después de preparar la revisión Sofía y el cierre del chat.
-No requiere migraciones ni cambios en Flutter.
+No requiere migraciones ni cambios en Flutter. La consulta admite bases anteriores sin `bookings.cancellation_reason`; en ellas utiliza los eventos de cancelación conservados y no intenta reconstruir motivos ausentes.
 
 - Usuarios: hasta 100 cuentas recientes, fecha de creación en America/La_Paz, viajes finalizados como conductor y pasajero, y cancelaciones propias por rol.
 - Viajes del conductor: hasta 200 viajes recientes, reservas aceptadas/completadas, cuentas con encuentro verificado y suma de sus asientos. Verificar una reserva de dos asientos confirma una cuenta; no demuestra la identidad de sus acompañantes.
@@ -18,4 +18,4 @@ npm install --prefix /tmp/vamos-admin-qa @electric-sql/pglite jsdom
 NODE_PATH=/tmp/vamos-admin-qa/node_modules node tool/admin-users/verify.cjs /ruta/absoluta/proyecto
 ```
 
-La comprobación incluye usuarios sin viajes, separación de roles, cancelación repetida/re-reserva, cancelación en cascada por conductor, cancelación histórica con motivo, asientos múltiples, fecha en Bolivia, validación y edición en el diálogo.
+La comprobación incluye usuarios sin viajes, separación de roles, cancelación repetida/re-reserva, cancelación en cascada por conductor, cancelación histórica con motivo, base anterior sin columna de motivo, asientos múltiples, fecha en Bolivia, validación y edición en el diálogo.

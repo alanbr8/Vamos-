@@ -25,6 +25,12 @@ if(!project)throw new Error('Indica la ruta absoluta del proyecto extraído');
  const tripSql=service.match(/async userDriverTrips\(.*?return this.db.query\(`([\s\S]*?)`, \[id\]\)/s)[1];
  const done=(await db.query(tripSql,['driver'])).rows.find(r=>r.id==='done');
  assert.equal(done.confirmedPassengers,1);assert.equal(done.confirmedSeats,2);assert.equal(done.acceptedBookings,1);
+ // Missing optional metadata must not prevent the users list from loading.
+ await db.exec('ALTER TABLE bookings DROP COLUMN cancellation_reason');
+ const legacyRows=(await db.query(usersSql,[null])).rows;
+ assert.equal(legacyRows.length,3);
+ assert.equal(legacyRows.find(r=>r.id==='passenger').passengerCancellations,2);
+ assert.equal(legacyRows.find(r=>r.id==='empty').passengerCancellations,0);
  await db.close();
  const dom=new JSDOM(fs.readFileSync(project+'/admin/index.html','utf8'),{url:'https://example.test/admin/',runScripts:'outside-only'});
  const w=dom.window;w.HTMLDialogElement.prototype.showModal=function(){this.open=true};w.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new w.Event('close'))};
