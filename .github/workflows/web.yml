@@ -26,6 +26,8 @@ jobs:
 
       - name: Configurar cierre del chat
         run: python3 tool/chat-expiry/apply.py proyecto
+      - name: Configurar modalidad Solo mujeres
+        run: python3 tool/women-mode/apply.py proyecto
 
       - name: Agregar crédito INGENIX
         run: python3 tool/aplicar_credito_ingenix.py proyecto/vamos_app

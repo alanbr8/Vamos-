@@ -14,6 +14,7 @@ rm -rf "$project_dir"
 mkdir -p "$project_dir"
 unzip -q "$source_zip" -d "$project_dir"
 python3 "$PWD/tool/chat-expiry/apply.py" "$project_dir"
+python3 "$PWD/tool/women-mode/apply.py" "$project_dir"
 python3 "$PWD/tool/aplicar_credito_ingenix.py" "$project_dir/vamos_app"
 
 if [[ ! -x "$flutter_dir/bin/flutter" ]]; then

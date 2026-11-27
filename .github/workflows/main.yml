@@ -26,6 +26,8 @@ jobs:
           node-version: '22'
       - run: unzip -q Vamos_MVP_Fullstack_1.9.7.zip -d proyecto
       - run: python3 tool/chat-expiry/apply.py proyecto
+      - name: Configurar modalidad Solo mujeres
+        run: python3 tool/women-mode/apply.py proyecto
       - run: python3 tool/admin-users/apply.py proyecto
       - run: npm ci --include=dev
         working-directory: proyecto/backend
@@ -51,6 +53,8 @@ jobs:
           channel: stable
       - run: unzip -q Vamos_MVP_Fullstack_1.9.7.zip -d proyecto
       - run: python3 tool/chat-expiry/apply.py proyecto
+      - name: Configurar modalidad Solo mujeres
+        run: python3 tool/women-mode/apply.py proyecto
       - name: Agregar crédito INGENIX
         run: python3 tool/aplicar_credito_ingenix.py proyecto/vamos_app
       - name: Preparar Android
