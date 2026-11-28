@@ -24,16 +24,17 @@ android=app/'android/app'
 shutil.copyfile(source/'build.gradle.kts',android/'build.gradle.kts')
 manifest=android/'src/main/AndroidManifest.xml'
 text=manifest.read_text()
-for attr,value in [('usesCleartextTraffic','false'),('debuggable','false'),('networkSecurityConfig','@xml/network_security_config')]:
+for attr,value in [('usesCleartextTraffic','false'),('networkSecurityConfig','@xml/network_security_config')]:
     pattern=rf'android:{attr}="[^"]*"'
     if re.search(pattern,text):text=re.sub(pattern,f'android:{attr}="{value}"',text)
     else:text=text.replace('<application',f'<application\n        android:{attr}="{value}"',1)
+text=re.sub(r'\s+android:debuggable="[^"]*"','',text)
 manifest.write_text(text)
 # Cleartext cannot be reenabled by the debug/profile manifest merge.
 for variant in ['debug','profile']:
     variant_file=android/f'src/{variant}/AndroidManifest.xml'
     if variant_file.exists():
-        text=variant_file.read_text().replace('android:usesCleartextTraffic="true"','android:usesCleartextTraffic="false"').replace('android:debuggable="true"','android:debuggable="false"')
+        text=variant_file.read_text().replace('android:usesCleartextTraffic="true"','android:usesCleartextTraffic="false"')
         variant_file.write_text(text)
 resources=android/'src/main/res/xml'
 resources.mkdir(parents=True,exist_ok=True)

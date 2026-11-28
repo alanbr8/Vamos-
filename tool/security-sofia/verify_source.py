@@ -8,7 +8,7 @@ android=root/'vamos_app/android/app'
 ns='{http://schemas.android.com/apk/res/android}'
 application=ET.parse(android/'src/main/AndroidManifest.xml').getroot().find('application')
 assert application.get(ns+'usesCleartextTraffic')=='false'
-assert application.get(ns+'debuggable')=='false'
+assert application.get(ns+'debuggable') is None  # Gradle assigns release=false; Android lint forbids hardcoding this.
 assert application.get(ns+'networkSecurityConfig')=='@xml/network_security_config'
 for manifest in android.glob('src/*/AndroidManifest.xml'):
     for node in ET.parse(manifest).iter('application'):

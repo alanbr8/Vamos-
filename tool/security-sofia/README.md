@@ -6,7 +6,7 @@ Estado: correcciones de código preparadas; el cierre depende del despliegue y d
 
 1. HSTS: middleware global previo a todas las rutas: `Strict-Transport-Security: max-age=31536000`. Cubre la API, /admin y /admin/revision-sofia, incluso sus errores. Se limita al hostname administrado; no se incluye includeSubDomains ni preload sin validar primero servicios adicionales. Render conserva su redirección HTTP a HTTPS. La cabecera no reactiva el acceso temporal de revisión si ya venció.
 2. Firma: Android release usa exclusivamente una clave privada de producción del custodio INGENIX; la configuración y el preflight rechazan usar Android Debug. No hay sustitución automática por una clave de pruebas. El certificado Android puede ser autofirmado por INGENIX; no necesita comprarse un certificado TLS.
-3. Depuración: workflow cambia `flutter build apk --debug` por `--release`; Gradle fija `isDebuggable=false` y el manifiesto principal fija `android:debuggable=false`.
+3. Depuración: workflow cambia `flutter build apk --debug` por `--release`; Gradle fija `isDebuggable=false`; el manifiesto fuente no fija el atributo para respetar Android Lint. La verificación de la APK final comprueba que la depuración esté deshabilitada.
 4. Compatibilidad: `minSdk=31` (Android 12), sujeto al parque aprobado para el piloto. El mínimo no garantiza que un teléfono tenga parches actuales.
 5. Tráfico: `usesCleartextTraffic=false` en el manifiesto principal y en las variantes existentes; Network Security Config deniega HTTP y usa certificados del sistema. La configuración de la API usa HTTPS por defecto y rechaza una API HTTP en release.
 
