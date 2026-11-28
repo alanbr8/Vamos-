@@ -1,0 +1,37 @@
+name: Publicar APK verificada para landing
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publicar-apk.yml'
+      - 'tool/security-sofia/publish_verified_apk.py'
+permissions:
+  contents: read
+concurrency:
+  group: vamos-release-1-10-1
+  cancel-in-progress: false
+jobs:
+  publicar:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Descargar APK e informe del build aprobado
+        uses: actions/download-artifact@v4
+        with:
+          name: Vamos-Produccion-Sofia
+          run-id: 46146563280
+          github-token: ${{ github.token }}
+          path: verified-artifact
+      - name: Verificar identidad del APK y publicar descarga directa
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python3 tool/security-sofia/publish_verified_apk.py
