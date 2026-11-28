@@ -1,6 +1,11 @@
 name: Compilar Vamos Android
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'tool/security-sofia/**'
+      - '.github/workflows/main.yml'
 permissions:
   contents: read
 jobs:
@@ -29,6 +34,9 @@ jobs:
       - name: Configurar modalidad Solo mujeres
         run: python3 tool/women-mode/apply.py proyecto
       - run: python3 tool/admin-users/apply.py proyecto
+      - run: python3 tool/security-sofia/apply.py proyecto
+      - run: python3 tool/security-sofia/verify_source.py proyecto
+      - run: python3 tool/security-sofia/test_verify_apk.py
       - run: npm ci --include=dev
         working-directory: proyecto/backend
       - run: npm run build && npm test -- --runInBand
@@ -39,6 +47,10 @@ jobs:
           TEST_DATABASE_URL: postgresql://vamos_test:solo-ci-efimero@127.0.0.1:5432/vamos_test
   android:
     needs: verificar-api
+    env:
+      VAMOS_RELEASE_STORE_PASSWORD: ${{ secrets.VAMOS_RELEASE_STORE_PASSWORD }}
+      VAMOS_RELEASE_KEY_PASSWORD: ${{ secrets.VAMOS_RELEASE_KEY_PASSWORD }}
+      VAMOS_RELEASE_KEY_ALIAS: ${{ secrets.VAMOS_RELEASE_KEY_ALIAS }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -47,6 +59,13 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Preparar firma de producción
+        env:
+          VAMOS_RELEASE_KEYSTORE: ${{ secrets.VAMOS_RELEASE_KEYSTORE }}
+          VAMOS_RELEASE_STORE_PASSWORD: ${{ secrets.VAMOS_RELEASE_STORE_PASSWORD }}
+          VAMOS_RELEASE_KEY_PASSWORD: ${{ secrets.VAMOS_RELEASE_KEY_PASSWORD }}
+          VAMOS_RELEASE_KEY_ALIAS: ${{ secrets.VAMOS_RELEASE_KEY_ALIAS }}
+        run: python3 tool/security-sofia/prepare_signing.py
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.47.2'
@@ -70,35 +89,55 @@ jobs:
           cp /tmp/plantilla/android/app/build.gradle.kts proyecto/vamos_app/android/app/
           sed -i 's/com\.example\.plantilla/com.vamoscarpool.app/g' proyecto/vamos_app/android/app/build.gradle.kts
           chmod +x proyecto/vamos_app/android/gradlew
+      - name: Aplicar configuración de producción después de generar Android
+        run: python3 tool/security-sofia/apply.py proyecto
+      - run: python3 tool/security-sofia/verify_source.py proyecto
       - name: Configurar Firebase Android
         run: python3 tool/configurar_push_android.py
         working-directory: proyecto/vamos_app
         env:
           VAMOS_FIREBASE_ANDROID_JSON: ${{ secrets.VAMOS_FIREBASE_ANDROID_JSON }}
-      - name: Restaurar firma estable de pruebas
-        env:
-          VAMOS_ANDROID_KEYSTORE: ${{ secrets.VAMOS_ANDROID_KEYSTORE }}
-        run: |
-          if [ -z "$VAMOS_ANDROID_KEYSTORE" ]; then
-            echo "Falta el secreto VAMOS_ANDROID_KEYSTORE. Sigue delivery/LEEME.md."
-            exit 1
-          fi
-          mkdir -p "$HOME/.android"
-          printf '%s' "$VAMOS_ANDROID_KEYSTORE" | base64 --decode > "$HOME/.android/debug.keystore"
-          chmod 600 "$HOME/.android/debug.keystore"
-          keytool -list -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey
       - run: flutter pub get
         working-directory: proyecto/vamos_app
       - run: flutter analyze --no-fatal-infos --no-fatal-warnings
         working-directory: proyecto/vamos_app
       - run: flutter test
         working-directory: proyecto/vamos_app
-      - name: Compilar APK de prueba
-        run: flutter build apk --debug --build-number=$((1000 + GITHUB_RUN_NUMBER)) --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
+      - name: Compilar APK de producción
+        run: flutter build apk --release --build-number=$((1000 + GITHUB_RUN_NUMBER)) --dart-define=API_BASE_URL=https://vamos-api.onrender.com/api/v1
         working-directory: proyecto/vamos_app
+      - name: Verificar APK final y generar evidencias para Sofía
+        run: python3 tool/security-sofia/verify_apk.py proyecto/vamos_app/build/app/outputs/flutter-apk/app-release.apk evidencias/android
       - uses: actions/upload-artifact@v4
         with:
-          name: Vamos-Android-Prueba
-          path: proyecto/vamos_app/build/app/outputs/flutter-apk/app-debug.apk
+          name: Vamos-Produccion-Sofia
+          path: |
+            proyecto/vamos_app/build/app/outputs/flutter-apk/app-release.apk
+            evidencias/android/
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 30
+      - name: Retirar clave temporal del runner
+        if: always()
+        run: rm -f "$RUNNER_TEMP/vamos-production.jks"
+  evidencias-web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Esperar despliegue y comprobar HSTS publicado
+        run: |
+          for attempt in 1 2 3 4 5 6; do
+            if python3 tool/security-sofia/verify_web.py evidencias/web; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 6 ]; then sleep 20; fi
+          done
+          echo "HSTS todavía no está verificado en Render. Revisa el despliegue y repite esta comprobación."
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Evidencia-HSTS-Sofia
+          path: evidencias/web/
+          if-no-files-found: warn
+          retention-days: 30

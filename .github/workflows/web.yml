@@ -29,6 +29,9 @@ jobs:
       - name: Configurar modalidad Solo mujeres
         run: python3 tool/women-mode/apply.py proyecto
 
+      - name: Aplicar seguridad de producción
+        run: python3 tool/security-sofia/apply.py proyecto
+
       - name: Agregar crédito INGENIX
         run: python3 tool/aplicar_credito_ingenix.py proyecto/vamos_app
 
