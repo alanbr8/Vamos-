@@ -1,5 +1,6 @@
 """Materialize production signing only inside the ephemeral runner."""
 import base64
+import hashlib
 import os
 from pathlib import Path
 import subprocess
@@ -25,6 +26,8 @@ if certificate.returncode:
 if 'android debug' in certificate.stdout.lower():
     file.unlink(missing_ok=True)
     raise SystemExit('La clave corresponde a Android Debug y no sirve para el piloto')
+public_der=subprocess.run(['keytool','-exportcert','-keystore',str(file),'-storepass:env','VAMOS_RELEASE_STORE_PASSWORD','-alias',alias],check=True,capture_output=True).stdout
+fingerprint=hashlib.sha256(public_der).hexdigest()
 with open(os.environ['GITHUB_ENV'],'a') as env:
-    env.write(f'VAMOS_RELEASE_KEYSTORE_PATH={file}\nVAMOS_RELEASE_KEY_PASSWORD={key_password}\nVAMOS_RELEASE_KEY_ALIAS={alias}\n')
+    env.write(f'VAMOS_RELEASE_KEYSTORE_PATH={file}\nVAMOS_RELEASE_KEY_PASSWORD={key_password}\nVAMOS_RELEASE_KEY_ALIAS={alias}\nVAMOS_RELEASE_CERT_SHA256={fingerprint}\n')
 print('Firma de producción preparada sin exponer la clave ni sus contraseñas.')

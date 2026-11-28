@@ -7,16 +7,17 @@ import tempfile
 import unittest
 
 class FinalApkGate(unittest.TestCase):
-    def check_gate(self, *, debug='false', minimum='31', cleartext='false', signer='INGENIX Vamos', signature_ok=True):
+    def check_gate(self, *, debug='false', minimum='31', cleartext='false', signer='INGENIX Vamos', signature_ok=True, fingerprint=None, signer_label='Signer #1'):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);tools=root/'bin';tools.mkdir()
             manifest=f'<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.vamoscarpool.app"><uses-sdk android:minSdkVersion="{minimum}"/><application android:debuggable="{debug}" android:usesCleartextTraffic="{cleartext}"/></manifest>'
-            for name,output,code in [('apkanalyzer',manifest,0),('apksigner',f'Signer #1 certificate DN: CN={signer}, O=INGENIX',0 if signature_ok else 1)]:
+            digest=fingerprint or ('a'*64)
+            for name,output,code in [('apkanalyzer',manifest,0),('apksigner',f'{signer_label} certificate DN: CN={signer}, O=INGENIX\n{signer_label} certificate SHA-256 digest: {digest}',0 if signature_ok else 1)]:
                 tool=tools/name
                 tool.write_text('#!'+sys.executable+'\nimport sys\nprint('+repr(output)+')\nsys.exit('+str(code)+')\n')
                 tool.chmod(0o700)
             apk=root/'fixture.apk';apk.write_bytes(b'test fixture; not a distributable APK')
-            env={**os.environ,'PATH':str(tools)+os.pathsep+os.environ['PATH']}
+            env={**os.environ,'PATH':str(tools)+os.pathsep+os.environ['PATH'],'VAMOS_RELEASE_CERT_SHA256':'a'*64}
             result=subprocess.run([sys.executable,str(Path(__file__).with_name('verify_apk.py')),str(apk),str(root/'evidence')],env=env,capture_output=True,text=True)
             return result.returncode
     def test_production_configuration_passes(self):self.assertEqual(self.check_gate(),0)
@@ -24,6 +25,8 @@ class FinalApkGate(unittest.TestCase):
     def test_old_android_is_rejected(self):self.assertNotEqual(self.check_gate(minimum='24'),0)
     def test_cleartext_is_rejected(self):self.assertNotEqual(self.check_gate(cleartext='true'),0)
     def test_debug_certificate_is_rejected(self):self.assertNotEqual(self.check_gate(signer='Android Debug'),0)
+    def test_other_certificate_is_rejected(self):self.assertNotEqual(self.check_gate(fingerprint='b'*64),0)
+    def test_signer_label_format_does_not_change_identity(self):self.assertEqual(self.check_gate(signer_label='Signer (minSdkVersion=31)'),0)
     def test_invalid_signature_is_rejected(self):self.assertNotEqual(self.check_gate(signature_ok=False),0)
 
 if __name__=='__main__':unittest.main()
