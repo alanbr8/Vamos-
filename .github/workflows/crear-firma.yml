@@ -1,0 +1,40 @@
+name: Crear primera firma INGENIX desde celular
+on:
+  workflow_dispatch:
+    inputs:
+      confirmacion:
+        description: 'Solo para la PRIMERA firma. Escribe CREAR PRIMERA FIRMA'
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: vamos-first-production-signing
+  cancel-in-progress: false
+jobs:
+  crear-copia-cifrada:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Crear firma y verificar recuperación de copia cifrada
+        env:
+          VAMOS_RELEASE_STORE_PASSWORD: ${{ secrets.VAMOS_RELEASE_STORE_PASSWORD }}
+          VAMOS_RELEASE_KEYSTORE: ${{ secrets.VAMOS_RELEASE_KEYSTORE }}
+          CONFIRM_FIRST_KEY: ${{ inputs.confirmacion }}
+        run: python3 tool/security-sofia/create_cloud_signing.py firma-cifrada
+      - name: Entregar solo copia CIFRADA y certificado público
+        uses: actions/upload-artifact@v4
+        with:
+          name: Firma-INGENIX-Cifrada
+          path: |
+            firma-cifrada/VAMOS_RELEASE_KEYSTORE.txt
+            firma-cifrada/certificado-publico.pem
+            firma-cifrada/LEEME.txt
+          if-no-files-found: error
+          retention-days: 90

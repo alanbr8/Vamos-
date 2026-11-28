@@ -37,6 +37,7 @@ jobs:
       - run: python3 tool/security-sofia/apply.py proyecto
       - run: python3 tool/security-sofia/verify_source.py proyecto
       - run: python3 tool/security-sofia/test_verify_apk.py
+      - run: python3 tool/security-sofia/test_cloud_signing.py
       - run: npm ci --include=dev
         working-directory: proyecto/backend
       - run: npm run build && npm test -- --runInBand

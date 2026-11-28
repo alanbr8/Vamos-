@@ -12,6 +12,10 @@ Estado: correcciones de código preparadas; el cierre depende del despliegue y d
 
 Se aplica después de generar los archivos Android porque ese paso sobrescribía app/build.gradle.kts. Se mantienen las mejoras de chat, administración y Solo mujeres.
 
+## Desde un celular Android
+
+Ya puedes generar la primera firma desde GitHub, sin instalar herramientas en el teléfono. Sigue [ANDROID.md](ANDROID.md): se usa una contraseña privada, se descarga solo una copia cifrada y se guardan dos secretos. La creación requiere ejecución manual del propietario; no se ha generado automáticamente una clave de producción por añadir este código.
+
 ## Único requisito privado: firma de producción
 
 Este repositorio no contiene la clave ni sus contraseñas. Conserva una copia privada del keystore y de las contraseñas: las futuras actualizaciones deben usar la misma identidad de firma. No reutilices el antiguo VAMOS_ANDROID_KEYSTORE de pruebas.
